@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println("\n-----SECTION 2: MEMBERSHIP LOGIC-----");
         System.out.println("Basic total cost: " + basic.totalCost());
-        premium.applyDiscount(10); // 10% discount
+        premium.applyDiscount(10);
         System.out.println("Premium after discount: " + premium);
         System.out.println("Premium total cost: " + premium.totalCost());
 
