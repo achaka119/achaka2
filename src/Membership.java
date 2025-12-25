@@ -33,7 +33,7 @@ public class Membership {
     }
 
     public void applyDiscount(double percent) {
-        if (percent <= 0 || percent > 50) return; // simple rule
+        if (percent <= 0 || percent > 50) return;
         monthlyFee = monthlyFee * (1 - percent / 100.0);
     }
 
