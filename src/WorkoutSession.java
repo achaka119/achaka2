@@ -13,23 +13,44 @@ public class WorkoutSession {
         this.completed = completed;
     }
 
-    public int getSessionId() { return sessionId; }
-    public void setSessionId(int sessionId) { this.sessionId = sessionId; }
+    public int getSessionId() {
+        return sessionId;
+    }
 
-    public Member getMember() { return member; }
-    public void setMember(Member member) { this.member = member; }
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
+    }
 
-    public String getTrainerName() { return trainerName; }
-    public void setTrainerName(String trainerName) { this.trainerName = trainerName; }
+    public Member getMember() {
+        return member;
+    }
 
-    public int getDurationMinutes() { return durationMinutes; }
-    public void setDurationMinutes(int durationMinutes) { if (durationMinutes > 0) this.durationMinutes = durationMinutes; }
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
-    public boolean isCompleted() { return completed; }
-    public void setCompleted(boolean completed) { this.completed = completed; }
+    public String getTrainerName() {
+        return trainerName;
+    }
 
-    public boolean canStart() {
-        return member != null && member.canEnterGym() && !completed;
+    public void setTrainerName(String trainerName) {
+        this.trainerName = trainerName;
+    }
+
+    public int getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(int durationMinutes) {
+        if (durationMinutes > 0) this.durationMinutes = durationMinutes;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public void extend(int extraMinutes) {
@@ -40,17 +61,5 @@ public class WorkoutSession {
     public void complete() {
         completed = true;
     }
-
-    @Override
-    public String toString() {
-        return "WorkoutSession{" +
-                "sessionId=" + sessionId +
-                ", member=" + (member != null ? member.getName() : "None") +
-                ", trainerName='" + trainerName + '\'' +
-                ", durationMinutes=" + durationMinutes +
-                ", completed=" + completed +
-                '}';
-    }
 }
-
 
