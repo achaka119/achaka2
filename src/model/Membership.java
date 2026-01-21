@@ -1,3 +1,5 @@
+package model;
+
 public class Membership {
     private int membershipId;
     private String name;
@@ -39,7 +41,7 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership{" +
+        return "model.Membership{" +
                 "membershipId=" + membershipId +
                 ", name='" + name + '\'' +
                 ", monthlyFee=" + monthlyFee +

@@ -1,3 +1,5 @@
+package model;
+
 public class WorkoutSession {
     private int sessionId;
     private Member member;

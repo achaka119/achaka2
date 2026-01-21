@@ -1,20 +1,22 @@
-public class Trainer {
+package model;
+
+public abstract class Trainer {
     private int Id;
     private String name;
     private int age;
     private int experienceYears;
-    private String specialization;
     private double salary;
 
-    public Trainer(int Id, String name, int age, int experienceYears, String specialization, double salary) {
+    public Trainer(int Id, String name, int age, int experienceYears, double salary) {
         this.Id = Id;
         this.name = name;
         this.age = age;
         this.experienceYears = experienceYears;
-        this.specialization = specialization;
         this.salary = salary;
 
     }
+
+    public String getName() { return name; }
 
     public int getId() { return Id; }
     public void setId(int Id) { this.Id = Id; }
@@ -37,12 +39,11 @@ public class Trainer {
 
     @Override
     public String toString() {
-        return "Trainer{" +
+        return "model.Trainer{" +
                 "trainerId=" + Id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", experienceYear=" + experienceYears +
-                ", specialization=" + specialization +
                 ", salary=" + salary +
                 '}';
     }

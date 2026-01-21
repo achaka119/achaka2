@@ -1,3 +1,5 @@
+package model;
+
 public class StudentMember extends Member {
     private String universityName;
     private String studentId;

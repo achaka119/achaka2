@@ -1,3 +1,5 @@
+package model;
+
 public class PremiumMember extends Member {
     private boolean hasPersonalTrainer;
     private int guestPasses;
@@ -14,12 +16,12 @@ public class PremiumMember extends Member {
 
     @Override
     public void showInfo(){
-        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType() + " Has Personal Trainer: " + hasPersonalTrainer);
+        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType() + " Has Personal model.Trainer: " + hasPersonalTrainer);
     }
 
     @Override
     public String getMemberType() {
-        return "Premium Member";
+        return "Premium model.Member";
     }
 
     public void accessSauna() {
