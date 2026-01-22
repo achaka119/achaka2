@@ -25,7 +25,7 @@ public class MenuManager implements Menu {
             System.out.println("5. Make All Members show INFO (Polymorphism Demo)");
             System.out.println("6. View Student Members Only");
             System.out.println("7. View Premium Members Only");
-            System.out.println("8. Add Personal Treainers");
+            System.out.println("8. Add Personal Trainers");
             System.out.println("9. Add Group Trainers");
             System.out.println("10. View All Trainers");
             System.out.println("0. Exit");
@@ -39,9 +39,10 @@ public class MenuManager implements Menu {
         boolean running = true;
         while (running) {
             displayMenu();
+
+        try {
             int choice = scanner.nextInt();
             scanner.nextLine();
-
             switch (choice) {
                 case 1:
                     addMemberGeneral();
@@ -54,6 +55,7 @@ public class MenuManager implements Menu {
                     break;
                 case 4:
                     viewAllMembers();
+                    break;
                 case 5:
                     makeAllMembersShowInfo();
                     break;
@@ -79,7 +81,10 @@ public class MenuManager implements Menu {
                 default:
                     System.out.println("\n Invalid choice!");
             }
-
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Error: Please enter a NUMBER.");
+        }
             if (running) {
                 System.out.println("\nPress Enter to continue...");
                 scanner.nextLine();
@@ -89,29 +94,37 @@ public class MenuManager implements Menu {
     }
 
     public static void addMemberGeneral() {
-        Random random = new Random();
-        int Id = random.nextInt();
-        System.out.println("\n--- ADD MEMBERS ---");
-        System.out.print("Enter name: ");
-        String name = scanner.nextLine();
+        try {
+            Random random = new Random();
+            int Id = random.nextInt();
+            System.out.println("\n--- ADD MEMBERS ---");
 
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
+            System.out.print("Enter name: ");
+            String name = scanner.nextLine();
 
-        System.out.print("Enter phoneNumber: ");
-        String phoneNumber = scanner.nextLine();
-        scanner.nextLine();
+            System.out.print("Enter age: ");
+            int age = scanner.nextInt();
 
-        System.out.print("Enter baseMonthlyFee: ");
-        double baseMonthlyFee = scanner.nextDouble();
-        scanner.nextLine();
+            System.out.print("Enter phoneNumber: ");
+            String phoneNumber = scanner.nextLine();
+            scanner.nextLine();
+
+            System.out.print("Enter baseMonthlyFee: ");
+            double baseMonthlyFee = scanner.nextDouble();
+            scanner.nextLine();
 
 
+            Member member = new Member(Id, name, age, phoneNumber, baseMonthlyFee);
+            members.add(member);
 
-        Member member = new Member(Id, name, age, phoneNumber, baseMonthlyFee);
-        members.add(member);
+            System.out.println("\n General Member added successfully!");
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Error: Age and fee must be numeric values.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
-        System.out.println("\n General model.Member added successfully!");
     }
 
     public static void addStudentMember() {
@@ -173,7 +186,7 @@ public class MenuManager implements Menu {
         Member member = new PremiumMember(Id, name, age, phoneNumber, baseMonthlyFee, hasPersonalTrainer, guestPass);
         members.add(member);
 
-        System.out.println("\n Premium model.Member added successfully!");
+        System.out.println("\n Premium Member added successfully!");
     }
 
     public static void viewAllMembers() {
@@ -188,20 +201,20 @@ public class MenuManager implements Menu {
         System.out.println("Total members: " + members.size());
         System.out.println();
 
-        for(int i = 0; i < members.size(); i++) {
-            Member m = members.get(i);
+       for(int i = 0; i < members.size(); i++) {
+           Member m = members.get(i);
+           System.out.println((i + 1) + ". " + m);
 
-            System.out.println((i + 1 ) + ". " + m);
 
-            if (m instanceof StudentMember) {
-                StudentMember student = (StudentMember) m;
-                System.out.println("students pays: " + student.calculateMonthlyFee());
-            } else if (m instanceof PremiumMember) {
-                PremiumMember premiumMember = (PremiumMember) m;
-                System.out.println("premium members pays" + premiumMember.calculateMonthlyFee());
-            }
-            System.out.println();
-        }
+           if (m instanceof StudentMember) {
+               StudentMember student = (StudentMember) m;
+               System.out.println("student pays " + student.calculateMonthlyFee());
+           } else if (m instanceof PremiumMember) {
+               PremiumMember premiumMember = (PremiumMember) m;
+               System.out.println("premium members pays " + premiumMember.calculateMonthlyFee());
+           }
+           System.out.println();
+       }
     }
 
     public static void makeAllMembersShowInfo() {
@@ -288,36 +301,33 @@ public class MenuManager implements Menu {
         System.out.println("            ALL TRAINERS                ");
         System.out.println("========================================");
 
-        if (trainers.isEmpty()) {
-            System.out.println("No trainers found.");
-            return;
-        }
+       if (trainers.isEmpty()) {
+           System.out.println("No trainers found ");
+       }
 
-        System.out.println("Total trainers: " + trainers.size());
-        System.out.println();
-
-        for (int i = 0; i < trainers.size(); i++) {
-            Trainer t = trainers.get(i);
-            System.out.println((i + 1) + ". " + t);
-        }
+       for (int i = 0; i < trainers.size(); i++) {
+           Trainer t = trainers.get(i);
+           System.out.println((i + 1) + ". " + t);
+       }
     }
 
     private static void viewStudentMembersOnly() {
         System.out.println("\n========================================");
         System.out.println(" STUDENTS ONLY");
         System.out.println("========================================");
-        int studentCount = 0;
-        for (Member s : members) {
-            if (s instanceof StudentMember) {
-                StudentMember student = (StudentMember) s;
-                studentCount++;
-                System.out.println(studentCount + ". " + student);
-                System.out.println();
-            }
-        }
-        if (studentCount == 0) {
-            System.out.println("No students found.");
-        }
+       int Studentcount = 0;
+
+       for (Member s: members) {
+           if (s instanceof StudentMember){
+               StudentMember student = (StudentMember) s;
+               Studentcount++;
+               System.out.println(Studentcount + ". " + student);
+               System.out.println();
+           }
+       }
+       if (Studentcount == 0) {
+           System.out.println("No students found.");
+       }
     }
 
     private static void viewPremiumMembersOnly() {
@@ -337,5 +347,4 @@ public class MenuManager implements Menu {
             System.out.println("No Premium members11 found.");
         }
     }
-
 }

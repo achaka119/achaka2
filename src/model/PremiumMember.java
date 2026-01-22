@@ -16,12 +16,12 @@ public class PremiumMember extends Member {
 
     @Override
     public void showInfo(){
-        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType() + " Has Personal model.Trainer: " + hasPersonalTrainer);
+        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType() + " Has Personal Trainer: " + hasPersonalTrainer);
     }
 
     @Override
     public String getMemberType() {
-        return "Premium model.Member";
+        return "Premium Member";
     }
 
     public void accessSauna() {

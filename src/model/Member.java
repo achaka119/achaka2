@@ -33,7 +33,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return "model.Member{" +
+        return "Member{" +
                 "memberId=" + memberId +
                 ", name='" + name + '\'' +
                 ", age=" + age +

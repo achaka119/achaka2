@@ -39,7 +39,7 @@ public abstract class Trainer {
 
     @Override
     public String toString() {
-        return "model.Trainer{" +
+        return "Trainer{" +
                 "trainerId=" + Id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
