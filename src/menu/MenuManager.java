@@ -3,6 +3,7 @@ package menu;
 import exception.InvalidInputException;
 import model.*;
 
+import java.lang.classfile.instruction.BranchInstruction;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -94,37 +95,30 @@ public class MenuManager implements Menu {
     }
 
     public static void addMemberGeneral() {
-        try {
-            Random random = new Random();
-            int Id = random.nextInt();
-            System.out.println("\n--- ADD MEMBERS ---");
+        Random random = new Random();
+        int Id = random.nextInt();
 
-            System.out.print("Enter name: ");
-            String name = scanner.nextLine();
+        System.out.println("\n--- ADD MEMBERS ---");
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
 
-            System.out.print("Enter age: ");
-            int age = scanner.nextInt();
+        System.out.print("Enter age: ");
+        int age = scanner.nextInt();
 
-            System.out.print("Enter phoneNumber: ");
-            String phoneNumber = scanner.nextLine();
-            scanner.nextLine();
+        System.out.print("Enter phoneNumber: ");
+        String phoneNumber = scanner.nextLine();
+        scanner.nextLine();
 
-            System.out.print("Enter baseMonthlyFee: ");
-            double baseMonthlyFee = scanner.nextDouble();
-            scanner.nextLine();
+        System.out.print("Enter baseMonthlyFee: ");
+        double baseMonthlyFee = scanner.nextDouble();
+        scanner.nextLine();
 
 
-            Member member = new Member(Id, name, age, phoneNumber, baseMonthlyFee);
-            members.add(member);
 
-            System.out.println("\n General Member added successfully!");
-        }
-        catch (NumberFormatException e) {
-            System.out.println("Error: Age and fee must be numeric values.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        Member member = new Member(Id, name, age, phoneNumber, baseMonthlyFee);
+        members.add(member);
 
+        System.out.println("\n General Member added successfully!");
     }
 
     public static void addStudentMember() {
@@ -301,14 +295,18 @@ public class MenuManager implements Menu {
         System.out.println("            ALL TRAINERS                ");
         System.out.println("========================================");
 
-       if (trainers.isEmpty()) {
-           System.out.println("No trainers found ");
-       }
+        if (trainers.isEmpty()) {
+            System.out.println("No trainers found.");
+            return;
+        }
 
-       for (int i = 0; i < trainers.size(); i++) {
-           Trainer t = trainers.get(i);
-           System.out.println((i + 1) + ". " + t);
-       }
+        System.out.println("Total trainers: " + trainers.size());
+        System.out.println();
+
+        for (int i = 0; i < trainers.size(); i++) {
+            Trainer t = trainers.get(i);
+            System.out.println((i + 1) + ". " + t);
+        }
     }
 
     private static void viewStudentMembersOnly() {
