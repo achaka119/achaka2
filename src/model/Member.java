@@ -3,14 +3,14 @@ package model;
 public class Member {
     protected int memberId;
     protected String name;
-    protected int age;
+    protected String membershipType;
     protected String phoneNumber;
     protected double baseMonthlyFee;
 
-    public Member(int memberId, String name, int age, String phoneNumber, double baseMonthlyFee) {
+    public Member(int memberId, String name, String membershipType, String phoneNumber, double baseMonthlyFee) {
         this.memberId = memberId;
         this.name = name;
-        this.age = age;
+        this.membershipType = membershipType;
         this.phoneNumber = phoneNumber;
         this.baseMonthlyFee = baseMonthlyFee;
     }
@@ -23,20 +23,38 @@ public class Member {
         return "regular member";
     }
 
-    public void showInfo() {
-        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType());
+    public String getMembershipType() {
+        return membershipType;
     }
 
-    public boolean isAdult() {
-        return age >= 25;
+    public void showInfo() {
+        System.out.println("name: " + name + " membershipType: " + membershipType + " memberType: " + getMemberType());
     }
+
+    public int getmemberId() {
+        return memberId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public double getBaseMonthlyFee() {
+        return baseMonthlyFee;
+    }
+
+
 
     @Override
     public String toString() {
         return "Member{" +
                 "memberId=" + memberId +
                 ", name='" + name + '\'' +
-                ", age=" + age +
+                ", membershipType=" + membershipType +
                 ", phoneNumber=" + phoneNumber +
                 ", baseMonthlyFee=" + baseMonthlyFee +
                 '}';

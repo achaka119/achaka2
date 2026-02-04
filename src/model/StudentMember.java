@@ -4,8 +4,8 @@ public class StudentMember extends Member {
     private String universityName;
     private String studentId;
 
-    public StudentMember(int memberId, String name, int age, String phoneNumber, double baseMonthlyFee, String universityName, String studentId) {
-        super(memberId, name, age, phoneNumber, baseMonthlyFee);
+    public StudentMember(int memberId, String name, String membershipType, String phoneNumber, double baseMonthlyFee, String universityName, String studentId) {
+        super(memberId, name, membershipType, phoneNumber, baseMonthlyFee);
         this.universityName = universityName;
         this.studentId = studentId;
     }
@@ -22,7 +22,7 @@ public class StudentMember extends Member {
 
     @Override
     public void showInfo() {
-        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType() + " University name: " + universityName);
+        System.out.println("name: " + name + " membershipType: " + membershipType + " memberType: " + getMemberType() + " University name: " + universityName);
     }
 
     public String showStudentCard() {

@@ -102,8 +102,8 @@ public class MenuManager implements Menu {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
+        System.out.print("Enter membershipType: ");
+        String membershipType = scanner.nextLine();
 
         System.out.print("Enter phoneNumber: ");
         String phoneNumber = scanner.nextLine();
@@ -115,7 +115,7 @@ public class MenuManager implements Menu {
 
 
 
-        Member member = new Member(Id, name, age, phoneNumber, baseMonthlyFee);
+        Member member = new Member(Id, name, membershipType, phoneNumber, baseMonthlyFee);
         members.add(member);
 
         System.out.println("\n General Member added successfully!");
@@ -128,8 +128,8 @@ public class MenuManager implements Menu {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
+        System.out.print("Enter membershipType: ");
+        String membershipType = scanner.nextLine();
 
         System.out.print("Enter phoneNumber: ");
         String phoneNumber = scanner.nextLine();
@@ -145,7 +145,7 @@ public class MenuManager implements Menu {
         System.out.print("Enter Student ID: ");
         String studentId = scanner.nextLine();
 
-        Member member = new StudentMember(Id, name, age, phoneNumber, baseMonthlyFee, universityName, studentId);
+        Member member = new StudentMember(Id, name, membershipType, phoneNumber, baseMonthlyFee, universityName, studentId);
         members.add(member);
 
         System.out.println("\n Student model.Member added successfully!");
@@ -158,8 +158,8 @@ public class MenuManager implements Menu {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
+        System.out.print("Enter membershipType: ");
+        String  membershipType= scanner.nextLine();
 
         System.out.print("Enter phoneNumber: ");
         String phoneNumber = scanner.nextLine();
@@ -177,7 +177,7 @@ public class MenuManager implements Menu {
         int guestPass = scanner.nextInt();
         scanner.nextLine();
 
-        Member member = new PremiumMember(Id, name, age, phoneNumber, baseMonthlyFee, hasPersonalTrainer, guestPass);
+        Member member = new PremiumMember(Id, name, membershipType, phoneNumber, baseMonthlyFee, hasPersonalTrainer, guestPass);
         members.add(member);
 
         System.out.println("\n Premium Member added successfully!");

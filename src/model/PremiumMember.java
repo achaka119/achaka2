@@ -3,8 +3,8 @@ package model;
 public class PremiumMember extends Member {
     private boolean hasPersonalTrainer;
     private int guestPasses;
-    public PremiumMember(int memberId, String name, int age, String phoneNumber, double baseMonthlyFee, boolean hasPersonalTrainer, int guestPasses) {
-        super(memberId, name, age, phoneNumber, baseMonthlyFee);
+    public PremiumMember(int memberId, String name, String membershipType, String phoneNumber, double baseMonthlyFee, boolean hasPersonalTrainer, int guestPasses) {
+        super(memberId, name, membershipType, phoneNumber, baseMonthlyFee);
         this.hasPersonalTrainer = hasPersonalTrainer;
         this.guestPasses = guestPasses;
     }
@@ -16,7 +16,7 @@ public class PremiumMember extends Member {
 
     @Override
     public void showInfo(){
-        System.out.println("name: " + name + " age: " + age + " memberType: " + getMemberType() + " Has Personal Trainer: " + hasPersonalTrainer);
+        System.out.println("name: " + name + " membershipType: " + membershipType + " memberType: " + getMemberType() + " Has Personal Trainer: " + hasPersonalTrainer);
     }
 
     @Override
