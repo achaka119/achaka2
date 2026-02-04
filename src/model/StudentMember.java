@@ -4,8 +4,8 @@ public class StudentMember extends Member {
     private String universityName;
     private String studentId;
 
-    public StudentMember(int memberId, String name, String membershipType, String phoneNumber, double baseMonthlyFee, String universityName, String studentId) {
-        super(memberId, name, membershipType, phoneNumber, baseMonthlyFee);
+    public StudentMember(int memberId, String name, String membershipType, double baseMonthlyFee, String universityName, String studentId) {
+        super(memberId, name, membershipType,  baseMonthlyFee);
         this.universityName = universityName;
         this.studentId = studentId;
     }

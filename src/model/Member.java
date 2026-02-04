@@ -4,14 +4,12 @@ public class Member {
     protected int memberId;
     protected String name;
     protected String membershipType;
-    protected String phoneNumber;
     protected double baseMonthlyFee;
 
-    public Member(int memberId, String name, String membershipType, String phoneNumber, double baseMonthlyFee) {
+    public Member(int memberId, String name, String membershipType, double baseMonthlyFee) {
         this.memberId = memberId;
         this.name = name;
         this.membershipType = membershipType;
-        this.phoneNumber = phoneNumber;
         this.baseMonthlyFee = baseMonthlyFee;
     }
 
@@ -39,14 +37,22 @@ public class Member {
         return name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
     public double getBaseMonthlyFee() {
         return baseMonthlyFee;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMembershipType(String membershipType) {
+        this.membershipType = membershipType;
+    }
+
+    public void setBaseMonthlyFee(double baseMonthlyFee) {
+        this.baseMonthlyFee = baseMonthlyFee;
+    }
 
 
     @Override
@@ -55,7 +61,6 @@ public class Member {
                 "memberId=" + memberId +
                 ", name='" + name + '\'' +
                 ", membershipType=" + membershipType +
-                ", phoneNumber=" + phoneNumber +
                 ", baseMonthlyFee=" + baseMonthlyFee +
                 '}';
     }

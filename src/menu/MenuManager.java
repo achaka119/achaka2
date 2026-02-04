@@ -5,13 +5,17 @@ import model.*;
 
 import java.lang.classfile.instruction.BranchInstruction;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import database.MemberDAO;
+
 
 public class MenuManager implements Menu {
-    private static ArrayList<Member> members = new ArrayList<>();
     private static ArrayList<Trainer> trainers = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
+    private static MemberDAO memberDAO = new MemberDAO();
+
 
 
     @Override
@@ -29,7 +33,14 @@ public class MenuManager implements Menu {
             System.out.println("8. Add Personal Trainers");
             System.out.println("9. Add Group Trainers");
             System.out.println("10. View All Trainers");
-            System.out.println("0. Exit");
+            System.out.println("===================DATABASE=====================");
+            System.out.println("11. Update Member");
+            System.out.println("12. Delete Member");
+            System.out.println("13. Search Member by Name");
+            System.out.println("14. Search Member by Fee Range");
+            System.out.println("15. Search Member by Minimum Fee");
+
+        System.out.println("0. Exit");
             System.out.println("========================================");
             System.out.print("Enter your choice: ");
 
@@ -75,6 +86,22 @@ public class MenuManager implements Menu {
                 case 10:
                     viewAllTrainers();
                     break;
+                case 11:
+                    updateMember();
+                    break;
+                case 12:
+                    deleteMember();
+                    break;
+                case 13:
+                    searchMemberByName();
+                    break;
+                case 14:
+                    searchByFeeRange();
+                    break;
+                case 15:
+                    searchByMinFee();
+                    break;
+
                 case 0:
                     System.out.println("\n Goodbye!");
                     running = false;
@@ -95,31 +122,25 @@ public class MenuManager implements Menu {
     }
 
     public static void addMemberGeneral() {
-        Random random = new Random();
-        int Id = random.nextInt();
 
-        System.out.println("\n--- ADD MEMBERS ---");
+        System.out.println("\n--- ADD MEMBER ---");
+
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
 
         System.out.print("Enter membershipType: ");
         String membershipType = scanner.nextLine();
 
-        System.out.print("Enter phoneNumber: ");
-        String phoneNumber = scanner.nextLine();
-        scanner.nextLine();
-
         System.out.print("Enter baseMonthlyFee: ");
         double baseMonthlyFee = scanner.nextDouble();
         scanner.nextLine();
 
+        Member member = new Member(0, name, membershipType, baseMonthlyFee);
+        memberDAO.insertMember(member);
 
-
-        Member member = new Member(Id, name, membershipType, phoneNumber, baseMonthlyFee);
-        members.add(member);
-
-        System.out.println("\n General Member added successfully!");
+        System.out.println("Member added to database!");
     }
+
 
     public static void addStudentMember() {
         Random random = new Random();
@@ -131,10 +152,6 @@ public class MenuManager implements Menu {
         System.out.print("Enter membershipType: ");
         String membershipType = scanner.nextLine();
 
-        System.out.print("Enter phoneNumber: ");
-        String phoneNumber = scanner.nextLine();
-        scanner.nextLine();
-
         System.out.print("Enter baseMonthlyFee: ");
         double baseMonthlyFee = scanner.nextDouble();
         scanner.nextLine();
@@ -145,8 +162,8 @@ public class MenuManager implements Menu {
         System.out.print("Enter Student ID: ");
         String studentId = scanner.nextLine();
 
-        Member member = new StudentMember(Id, name, membershipType, phoneNumber, baseMonthlyFee, universityName, studentId);
-        members.add(member);
+        Member member = new StudentMember(Id, name, membershipType, baseMonthlyFee, universityName, studentId);
+        memberDAO.insertMember(member);
 
         System.out.println("\n Student model.Member added successfully!");
     }
@@ -161,10 +178,6 @@ public class MenuManager implements Menu {
         System.out.print("Enter membershipType: ");
         String  membershipType= scanner.nextLine();
 
-        System.out.print("Enter phoneNumber: ");
-        String phoneNumber = scanner.nextLine();
-        scanner.nextLine();
-
         System.out.print("Enter baseMonthlyFee: ");
         double baseMonthlyFee = scanner.nextDouble();
         scanner.nextLine();
@@ -177,39 +190,105 @@ public class MenuManager implements Menu {
         int guestPass = scanner.nextInt();
         scanner.nextLine();
 
-        Member member = new PremiumMember(Id, name, membershipType, phoneNumber, baseMonthlyFee, hasPersonalTrainer, guestPass);
-        members.add(member);
+        Member member = new PremiumMember(Id, name, membershipType, baseMonthlyFee, hasPersonalTrainer, guestPass);
+        memberDAO.insertMember(member);
 
         System.out.println("\n Premium Member added successfully!");
     }
 
     public static void viewAllMembers() {
-        System.out.println("\n========================================");
-        System.out.println(" ALL MEMBERS (POLYMORPHIC LIST)");
-        System.out.println("========================================");
-        if(members.isEmpty()) {
+
+        System.out.println("\n=== ALL MEMBERS ===");
+
+        List<Member> members = memberDAO.getAllMembers();
+
+        if (members == null || members.isEmpty()) {
             System.out.println("No members found.");
             return;
         }
 
-        System.out.println("Total members: " + members.size());
-        System.out.println();
-
-       for(int i = 0; i < members.size(); i++) {
-           Member m = members.get(i);
-           System.out.println((i + 1) + ". " + m);
-
-
-           if (m instanceof StudentMember) {
-               StudentMember student = (StudentMember) m;
-               System.out.println("student pays " + student.calculateMonthlyFee());
-           } else if (m instanceof PremiumMember) {
-               PremiumMember premiumMember = (PremiumMember) m;
-               System.out.println("premium members pays " + premiumMember.calculateMonthlyFee());
-           }
-           System.out.println();
-       }
+        for (Member m : members) {
+            System.out.println(m);
+        }
     }
+
+    private static void updateMember() {
+        System.out.print("Enter Member ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        Member member = memberDAO.getMemberById(id);
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        System.out.println("Current: " + member);
+
+        System.out.print("New name: ");
+        member.setName(scanner.nextLine());
+
+        System.out.print("New membership type: ");
+        member.setMembershipType(scanner.nextLine());
+
+        System.out.print("New base monthly fee: ");
+        member.setBaseMonthlyFee(scanner.nextDouble());
+        scanner.nextLine();
+
+        memberDAO.updateMember(member);
+    }
+
+    private static void deleteMember() {
+        System.out.print("Enter Member ID to delete: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        Member member = memberDAO.getMemberById(id);
+        if (member == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        System.out.println(member);
+        System.out.print("Are you sure? (yes/no): ");
+        String confirm = scanner.nextLine();
+
+        if (confirm.equalsIgnoreCase("yes")) {
+            memberDAO.deleteMember(id);
+        } else {
+            System.out.println("Deletion cancelled.");
+        }
+    }
+
+    private static void searchMemberByName() {
+        System.out.print("Enter name keyword: ");
+        String name = scanner.nextLine();
+
+        List<Member> members = memberDAO.searchByName(name);
+        members.forEach(System.out::println);
+    }
+
+    private static void searchByFeeRange() {
+        System.out.print("Enter minimum fee: ");
+        double min = scanner.nextDouble();
+
+        System.out.print("Enter maximum fee: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine();
+
+        List<Member> members = memberDAO.searchByFeeRange(min, max);
+        members.forEach(System.out::println);
+    }
+
+    private static void searchByMinFee() {
+        System.out.print("Enter minimum fee: ");
+        double min = scanner.nextDouble();
+        scanner.nextLine();
+
+        List<Member> members = memberDAO.searchByMinFee(min);
+        members.forEach(System.out::println);
+    }
+
 
     public static void makeAllMembersShowInfo() {
         System.out.println("\n========================================");
@@ -218,6 +297,7 @@ public class MenuManager implements Menu {
         System.out.println("Calling showInfo() on all members:");
         System.out.println();
 
+        List<Member> members = memberDAO.getAllMembers();
         for (Member s : members) {
             s.showInfo();
         }
@@ -315,6 +395,7 @@ public class MenuManager implements Menu {
         System.out.println("========================================");
        int Studentcount = 0;
 
+       List<Member> members = memberDAO.getAllMembers();
        for (Member s: members) {
            if (s instanceof StudentMember){
                StudentMember student = (StudentMember) s;
@@ -329,10 +410,14 @@ public class MenuManager implements Menu {
     }
 
     private static void viewPremiumMembersOnly() {
+
         System.out.println("\n========================================");
         System.out.println(" PREMIUMS ONLY");
         System.out.println("========================================");
+
+        List<Member> members = memberDAO.getAllMembers();
         int premiumCount = 0;
+
         for (Member s : members) {
             if (s instanceof PremiumMember) {
                 PremiumMember premiumMember = (PremiumMember) s;
@@ -341,8 +426,9 @@ public class MenuManager implements Menu {
                 System.out.println();
             }
         }
+
         if (premiumCount == 0) {
-            System.out.println("No Premium members11 found.");
+            System.out.println("No Premium members found.");
         }
     }
 }

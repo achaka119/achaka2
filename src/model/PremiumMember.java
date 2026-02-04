@@ -3,8 +3,8 @@ package model;
 public class PremiumMember extends Member {
     private boolean hasPersonalTrainer;
     private int guestPasses;
-    public PremiumMember(int memberId, String name, String membershipType, String phoneNumber, double baseMonthlyFee, boolean hasPersonalTrainer, int guestPasses) {
-        super(memberId, name, membershipType, phoneNumber, baseMonthlyFee);
+    public PremiumMember(int memberId, String name, String membershipType,  double baseMonthlyFee, boolean hasPersonalTrainer, int guestPasses) {
+        super(memberId, name, membershipType,  baseMonthlyFee);
         this.hasPersonalTrainer = hasPersonalTrainer;
         this.guestPasses = guestPasses;
     }
